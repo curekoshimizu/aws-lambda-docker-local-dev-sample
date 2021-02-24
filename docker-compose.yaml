@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  lambda:
+    build:
+      context: ./aws_lambda_sample
+    ports:
+      - 9000:8080
+    image: aws_lambda_sample
