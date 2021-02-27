@@ -8,12 +8,7 @@ COPY poetry.lock pyproject.toml setup.py ./
 RUN poetry export > /requirement.txt
 
 
-
-FROM public.ecr.aws/lambda/python:3.8
-RUN echo "Asia/Tokyo" > /etc/timezone \
-        && rm /etc/localtime \
-        && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-RUN pip install --upgrade pip
+FROM python:3.8.8-slim-buster
 
 WORKDIR /opt
 COPY --from=requirement_txt /requirement.txt requirement.txt
@@ -21,7 +16,8 @@ RUN pip install -r requirement.txt  \
         && rm requirement.txt
 
 COPY pyproject.toml setup.py ./
-COPY aws_lambda/ aws_lambda/
+COPY balancer/ balancer/
 RUN pip install .
+COPY scripts/ scripts/
 
-CMD ["aws_lambda.app.lambda_handler"]
+CMD ["./scripts/run_server.py"]

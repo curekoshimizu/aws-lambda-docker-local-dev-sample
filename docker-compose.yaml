@@ -1,8 +1,12 @@
 version: '3.7'
 services:
-  lambda:
+  aws_lambda:
     build:
-      context: ./aws_lambda_sample
+      context: ./docker_src/aws_lambda
+    image: aws_lambda
+  blancer:
+    build:
+      context: ./docker_src/balancer
     ports:
-      - 9000:8080
-    image: aws_lambda_sample
+      - 9001:9001
+    image: blancer

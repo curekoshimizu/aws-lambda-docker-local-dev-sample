@@ -7,8 +7,8 @@ lock = threading.Lock()
 
 
 def hello_world(
-    host: str = "localhost",
-    port: int = 9000,
+    host: str = "aws_lambda",
+    port: int = 8080,
 ) -> Any:
     with lock:
         ret = requests.post(f"http://{host}:{port}/2015-03-31/functions/function/invocations", data="{}")
