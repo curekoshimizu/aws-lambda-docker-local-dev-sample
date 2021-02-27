@@ -6,7 +6,8 @@ from client_sample import get_response
 
 
 async def main() -> None:
-    ret = await get_response(host="localhost", port=9001)
+    port = 9001
+    ret = await asyncio.gather(get_response(host="localhost", port=port), get_response(host="localhost", port=port))
     print("reponse : ", ret)
 
 
