@@ -18,6 +18,9 @@ poetry install
 poetry run ./scripts/multi_connection.py
 ```
 
+## Connection
+
+client_sample --> balancer (just bypass with mutex lock) --> aws_lambda
 
 # LICENSE
 
